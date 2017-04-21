@@ -1,5 +1,8 @@
  // Imports the Google Cloud client library
 const Vision = require('@google-cloud/vision');
+const util = require('util');
+
+
 
 // Your Google Cloud Platform project ID
 const projectId = 'searcharticle-165304';
@@ -13,7 +16,8 @@ const visionClient = Vision({
 const fileName = './assets/donald-trump.jpg';
 
 // Performs label detection on the image file
-console.log(visionClient);
+//console.log(util.inspect(visionClient, {showHidden: false, depth: null}));
+//console.log(JSON.stringify(visionClient, null, 4));
 
 
 visionClient.detectFaces(fileName)
