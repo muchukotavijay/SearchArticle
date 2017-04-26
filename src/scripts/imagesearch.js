@@ -1,3 +1,5 @@
+'use strict';
+
  // Imports the Google Cloud client library
  let vision = require('@google-cloud/vision')({
      projectId: "searcharticle-165304",

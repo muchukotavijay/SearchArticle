@@ -1,4 +1,6 @@
-let imageSearch = require('./src/scripts/imageSearch');
+'use strict';
+
+let imageSearch = require('./src/scripts/imagesearch');
 
 let imagePath = 'https://lh3.googleusercontent.com/-c44dxtQGUxE/AAAAAAAAAAI/AAAAAAAACTY/nxZSUuRWT00/s0-c-k-no-ns/photo.jpg';
 
