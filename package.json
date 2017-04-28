@@ -1,12 +1,15 @@
 {
-  "name": "imagesearch",
-  "version": "1.0.0",
-  "description": "",
+  "name": "NewsVision",
+  "version": "1.1.0",
+  "description": "Search News Network via captured image from handheld device",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muchukotavijay/SearchArticle.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "@google-cloud/vision": "^0.11.2"

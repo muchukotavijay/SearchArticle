@@ -1,0 +1,11 @@
+node_modules
+DS_store
+.DS_store
+.idea
+.npmrc
+.sass-cache
+test/client/temp
+public/*
+test/coverage
+*.tap
+npm-debug.log

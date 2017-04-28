@@ -1,4 +1,6 @@
-let imageSearch = require('./src/scripts/imageSearch');
+'use strict';
+
+let imageSearch = require('./src/scripts/imagesearch');
 
 let imagePath = 'http://storage.googleapis.com/gtech-pds-hyd/ShaikAzhar/Nydus_SS//QDZFJTWwPuT.png';
 
