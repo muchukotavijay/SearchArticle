@@ -4,15 +4,10 @@
         "commonjs": true,
         "es6": true
     },
-    "extends": "airbnb",
-    "parserOptions": {
-        "sourceType": "module"
-    },
+    "extends": "airbnb-base",
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
+        "no-tabs": 0,
+        "indent": ["error", "tab"],
         "linebreak-style": [
             "error",
             "unix"

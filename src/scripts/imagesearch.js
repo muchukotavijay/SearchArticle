@@ -1,48 +1,41 @@
-'use strict';
+const vision = require("@google-cloud/vision")({
+	projectId: "searcharticle-165304",
+     // The path to your key file:
+	keyFilename: "./config/keyfile.json",
+});
 
- // Imports the Google Cloud client library
- let vision = require('@google-cloud/vision')({
-     projectId: "searcharticle-165304",
-     // The path to your key file: 
-     keyFilename: '../config/keyfile.json',
-     // Or the contents of the key file: 
-     credentials: require('../config/keyfile.json')
- });
+// const util = require("util");
 
- const util = require('util');
+const imageSearch = {};
 
- let imageSearch = {};
-
- imageSearch.getEntities = (filePath, callback) => {
+imageSearch.getEntities = (filePath, callback) => {
      // The name of the image file to annotate
-     let fileName = filePath || './assets/somegirl.jpeg';
+	const fileName = filePath || "./assets/somegirl.jpeg";
 
-     //callback('these entities')
+     // callback('these entities')
 
     // Performs text detection on the local file
 
-    vision.detectText(fileName)
+	vision.detectText(fileName)
     .then((results) => {
-        const detections = results[0];
+	const detections = results[0];
         // console.log('Text:');
         // detections.forEach((text) => console.log(text));
-        if(detections.length > 0){
-            callback(detections, 'label');    
-        }
-
-    }).catch((err) => {
-        console.error('ERROR detecting text:', err);
-     });
+	if (detections.length > 0) {
+		callback(detections, "label");
+	}
+}).catch((err) => {
+	console.error("ERROR detecting text:", err);
+});
 
     // Detect similar images on the web to a local file
-    vision.detectSimilar(fileName)
+	vision.detectSimilar(fileName)
      .then((data) => {
-         const results = data[1].responses[0].webDetection;
-         callback(results,'webentities');
-     }).catch((err) => {
-        console.error('ERROR detecting similar:', err);
-     });
+	const results = data[1].responses[0].webDetection;
+	callback(results, "webentities");
+}).catch((err) => {
+	console.error("ERROR detecting similar:", err);
+});
+};
 
- };
-
- module.exports = imageSearch;
+module.exports = imageSearch;
