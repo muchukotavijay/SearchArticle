@@ -11,6 +11,7 @@ Steps to see response:
 
 # References 
 
+https://cloud.google.com/vision/
 https://codelabs.developers.google.com/codelabs/cloud-vision-nodejs/index.html?index=..%2F..%2Findex#0
 
 http://jsbin.com/lenabuteya/edit?html,css,js,output
