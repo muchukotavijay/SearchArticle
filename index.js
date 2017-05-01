@@ -23,6 +23,12 @@ app.get('/', function(req, res) {
 });
 
 let imageSearch = require('./src/scripts/imagesearch');
+let googleSearch = require('./src/scripts/googleSearch');
+
+
+googleSearch.getSearchResults('North Korea', (whatyouget) => {
+    console.log(whatyouget);
+});
 
 let imagePath = 'http://wallppr.net/wp-content/uploads/2016/10/Car-4K-Wallpaper-10.jpeg';
 
