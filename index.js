@@ -83,12 +83,12 @@ res.write('vision api response');
  
 imageSearch.getEntities(req.file.path, function(entities, type) {
 
-	   if(type === 'label'){
+	 if(type === 'label'){
         entities.forEach((text) => console.log(text));
-     }else if(type === 'webentities'){
+     } else if(type === 'webentities'){
         let results = entities;
 
-        if (results.fullMatchingImages.length > 0) {
+   /*     if (results.fullMatchingImages.length > 0) {
              console.log(`Full matches found: ${results.fullMatchingImages.length}`);
              results.fullMatchingImages.forEach((image) => {
                  console.log(`  URL: ${image.url}`);
@@ -104,19 +104,16 @@ imageSearch.getEntities(req.file.path, function(entities, type) {
              });
          }
 
+         */
+
          if (results.webEntities.length > 0) {
-             console.log(`Web entities found: ${results.webEntities.length}`);
+             console.log(`index Web entities found: ${results.webEntities.length}`);
              results.webEntities.forEach((webEntity) => {
                  console.log(`  Description: ${webEntity.description}`);
                  console.log(`  Score: ${webEntity.score}`);
              });
          }
      }
-     // console.log(entities);
-    // entities.forEach((webEntity) => {
-    //     console.log(`  Img Description: ${webEntity.description}`);
-    //     console.log(`  Img Score: ${webEntity.score}`);
-    // });
     
   });
 
