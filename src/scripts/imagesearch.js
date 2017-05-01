@@ -17,13 +17,19 @@
      // The name of the image file to annotate
      let fileName = filePath || './assets/somegirl.jpeg';
 
+     //callback('these entities')
+
     // Performs text detection on the local file
 
     vision.detectText(fileName)
     .then((results) => {
         const detections = results[0];
-        console.log('Text:');
-        detections.forEach((text) => console.log(text));
+        // console.log('Text:');
+        // detections.forEach((text) => console.log(text));
+        if(detections.length > 0){
+            callback(detections, 'label');    
+        }
+
     }).catch((err) => {
         console.error('ERROR detecting text:', err);
      });
@@ -32,36 +38,10 @@
     vision.detectSimilar(fileName)
      .then((data) => {
          const results = data[1].responses[0].webDetection;
-
-         if (results.fullMatchingImages.length > 0) {
-             console.log(`Full matches found: ${results.fullMatchingImages.length}`);
-             results.fullMatchingImages.forEach((image) => {
-                 console.log(`  URL: ${image.url}`);
-                 console.log(`  Score: ${image.score}`);
-             });
-         }
-
-         if (results.partialMatchingImages.length > 0) {
-             console.log(`Partial matches found: ${results.partialMatchingImages.length}`);
-             results.partialMatchingImages.forEach((image) => {
-                 console.log(`  URL: ${image.url}`);
-                 console.log(`  Score: ${image.score}`);
-             });
-         }
-
-         if (results.webEntities.length > 0) {
-             console.log(`Web entities found: ${results.webEntities.length}`);
-             results.webEntities.forEach((webEntity) => {
-                 console.log(`  Description: ${webEntity.description}`);
-                 console.log(`  Score: ${webEntity.score}`);
-             });
-         }
+         callback(results,'webentities');
      }).catch((err) => {
         console.error('ERROR detecting similar:', err);
      });
-
-
-
 
  };
 
