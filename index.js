@@ -13,7 +13,7 @@ let form = '<!DOCTYPE HTML><html><body>' +
   "<form method='post' action='/upload' enctype='multipart/form-data'>" +
   "<input type='file' name='image'/>" +
   "<input type='submit' /></form>" +
-  '</body></html>';
+  '</body>  </html>';
 
 app.get('/', function(req, res) {
   res.writeHead(200, {
@@ -129,8 +129,9 @@ res.end('</body></html>');
 });
 
 
-app.listen(8080);
-console.log('Server Started');
+app.listen(8080, function () {
+	console.log('Server running on port 8080');
+});
 
 // Turn image into Base64 so we can display it easily
 
