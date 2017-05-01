@@ -49,44 +49,6 @@ googleSearch.getSearchResults("North Korea", (whatyouget) => {
 // Get the uploaded image
 // Image is uploaded to req.file.path
 app.post("/upload", upload.single("image"), (req, res, next) => {
-  // Choose what the Vision API should detect
-  // Choices are: faces, landmarks, labels, logos, properties, safeSearch, texts
-  // var types = ['labels'];
-
-  // Send the image to the Cloud Vision API
-
-  /* vision.detect(req.file.path, types, function(err, detections, apiResponse) {
-    if (err) {
-      res.end('Cloud Vision Error');
-    } else {
-      res.writeHead(200, {
-        'Content-Type': 'text/html'
-      });
-      res.write('<!DOCTYPE HTML><html><body>');
-
-      // Base64 the image so we can display it on the page
-      res.write('<img width=200 src="' + base64Image(req.file.path) + '"><br>');
-
-      // Write out the JSON output of the Vision API
-      res.write(JSON.stringify(detections, null, 4));
-
-      // Delete file (optional)
-      fs.unlinkSync(req.file.path);
-
-      res.end('</body></html>');
-    }
-  });
-*/
-
-  /*
-  imageSearch.getEntities(imagePath, function(entities) {
-    entities.forEach((webEntity) => {
-        console.log(`  Description: ${webEntity.description}`);
-        console.log(`  Score: ${webEntity.score}`);
-    });
-  });
-
-*/
 
 	res.writeHead(200, {
 		"Content-Type": "text/html",
@@ -97,24 +59,22 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
   // Base64 the image so we can display it on the page
 	res.write(`<img width=200 src="${base64Image(req.file.path)}"><br>`);
 
-
 	imageSearch.getEntities(req.file.path, (entities, type) => {
 		if (type === "label") {
 			entities.forEach(text => console.log(text));
 		} else if (type === "webentities") {
-			const results = entities;
 
-      /*     if (results.fullMatchingImages.length > 0) {
-                console.log(`Full matches found: ${results.fullMatchingImages.length}`);
-                results.fullMatchingImages.forEach((image) => {
+      /*     if (entities.fullMatchingImages.length > 0) {
+                console.log(`Full matches found: ${entities.fullMatchingImages.length}`);
+                entities.fullMatchingImages.forEach((image) => {
                     console.log(`  URL: ${image.url}`);
                     console.log(`  Score: ${image.score}`);
                 });
             }
 
-            if (results.partialMatchingImages.length > 0) {
-                console.log(`Partial matches found: ${results.partialMatchingImages.length}`);
-                results.partialMatchingImages.forEach((image) => {
+            if (entities.partialMatchingImages.length > 0) {
+                console.log(`Partial matches found: ${entities.partialMatchingImages.length}`);
+                entities.partialMatchingImages.forEach((image) => {
                     console.log(`  URL: ${image.url}`);
                     console.log(`  Score: ${image.score}`);
                 });
@@ -122,15 +82,16 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 
             */
 
-			if (results.webEntities.length > 0) {
+			if (entities.webEntities.length > 0) {
 				console.log(`index Web entities found: ${results.webEntities.length}`);
-				results.webEntities.forEach((webEntity) => {
+				entities.webEntities.forEach((webEntity) => {
 					console.log(`Description: ${webEntity.description}`);
 					console.log(`Score: ${webEntity.score}`);
 				});
 			}
 		}
 	});
+
 	next();
 
 	res.end("</body></html>");
