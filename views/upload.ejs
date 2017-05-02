@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <% include ../views/partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../views/partials/header %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <p><%= msg %></p>
+                <img src="<%= pic %>" width=200 class="img-rounded img-responsive" alt="">
+                <ul class="list-group">
+                    <% visionResults.forEach(function(item) { %>
+                        <li class="list-group-item clearfix">
+                            <%- item.description %> [<%- item.score %>]
+                        </li>
+                    <% }); %>
+                </ul>
+                <h3>Search With</h3>
+                <p><strong><%= searchString %></strong></p>
+            </div>
+            <div class="col-sm-4">
+                
+                <div class="well">
+                    <h3>Look I'm A Sidebar!</h3>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <% include ../views/partials/footer %>
+    </footer>
+    
+</body>
+</html>

@@ -55,55 +55,37 @@ app.get("/", (req, res) => {
 
 app.post("/upload", upload.single("image"), (req, res, next) => {
 	
-  res.writeHead(200, {
+  /*res.writeHead(200, {
 		"Content-Type": "text/html"
 	});
 	res.write("<!DOCTYPE HTML><html><body>");
 	res.write("<h3>POST request to the page / vision api response.</h3>");
   // Base64 the image so we can display it on the page
 	res.write(`<img width=200 src="${base64Image(req.file.path)}"><br>`);
-
+*/
 	imageSearch.getEntities(req.file.path, (entities, type) => {
 		console.log(req.file.path);
 		if (type === "label") {
-			entities.forEach(text => console.log(text));
+//			entities.forEach(text => console.log(text));
 		} else if (type === "webentities") {
-
-      /*     if (entities.fullMatchingImages.length > 0) {
-                console.log(`Full matches found: ${entities.fullMatchingImages.length}`);
-                entities.fullMatchingImages.forEach((image) => {
-                    console.log(`  URL: ${image.url}`);
-                    console.log(`  Score: ${image.score}`);
-                });
-            }
-
-            if (entities.partialMatchingImages.length > 0) {
-                console.log(`Partial matches found: ${entities.partialMatchingImages.length}`);
-                entities.partialMatchingImages.forEach((image) => {
-                    console.log(`  URL: ${image.url}`);
-                    console.log(`  Score: ${image.score}`);
-                });
-            }
-
-            */
-
 			if (entities.webEntities.length > 0) {
 				console.log(`index Web entities found: ${entities.webEntities.length}`);
-				// res.write(entities.webEntities.length);
-
-        entities.webEntities.forEach((webEntity) => {
-          return res.write(webEntity.description +'</br>');
-         // res.write(webEntity.score);
-          /*console.log(`Description: ${webEntity.description}`);
-          console.log(`Score: ${webEntity.score}`);*/
+        const visionResults = entities.webEntities.map((webEntity) => {
+          const result = {
+            score: webEntity.score,
+            description: webEntity.description
+          };
+          return result;
         });
+
+        const searchString = visionResults.map(function(elem){
+                                return elem.description;
+                            }).join("+");
+
+      res.render('upload', {msg: 'upload', pic: base64Image(req.file.path), visionResults: visionResults, searchString: searchString })
 			}
 		}
-  }, function(){
-      //console.log('about to redirect');
-      //res.redirect('/results');
-      res.end("</body></html>");
-  });
+ });
 
     
 	//next();
@@ -114,7 +96,7 @@ app.get("/results", (req, res) => {
 
 googleSearch.getSearchResults(searchString, (searchResults) => {
   //console.log(searchResults);
-   return res.render('results', {msg : "Search Results", output: searchResults});
+   return res.render('results', {msg : "Search Results", searchResults: searchResults});
 });
 
 
