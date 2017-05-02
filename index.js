@@ -92,11 +92,10 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 });
 
 app.get("/results", (req, res) => {
-  const searchString = "Noth Korea";
-
+  const searchString = req.query.q || "Noth Korea";
 googleSearch.getSearchResults(searchString, (searchResults) => {
   //console.log(searchResults);
-   return res.render('results', {msg : "Search Results", searchResults: searchResults});
+   return res.render('results', {msg : "Search Results", searchString: searchString, searchResults: searchResults});
 });
 
 
