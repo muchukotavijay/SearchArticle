@@ -19,7 +19,7 @@ googleSearch.getSearchResults = (searchText, callback) => {
 			const result = {
 				title: item.title,
 				content: item.content,
-				unescapedUrl: item.unescapedUrl,
+				unescapedUrl: item.unescapedUrl
 			};
 			return result;
 		});

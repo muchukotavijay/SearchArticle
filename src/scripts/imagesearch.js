@@ -1,7 +1,7 @@
 const vision = require("@google-cloud/vision")({
 	projectId: "searcharticle-165304",
      // The path to your key file:
-	keyFilename: "./config/keyfile.json",
+	keyFilename: "./config/keyfile.json"
 });
 
 // const util = require("util");

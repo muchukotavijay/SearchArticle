@@ -1,5 +1,7 @@
 const express = require("express");
 
+const bodyParser= require('body-parser');
+
 const fs = require("fs");
 
 const util = require("util");
@@ -8,11 +10,17 @@ const mime = require("mime");
 
 const multer = require("multer");
 
+const imageSearch = require("./src/scripts/imagesearch");
+
+const googleSearch = require("./src/scripts/googleSearch");
+
 const upload = multer({
-	dest: "uploads/",
+	dest: __dirname + "/uploads/"
 });
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}))
 
 // Turn image into Base64 so we can display it easily
 
@@ -21,39 +29,34 @@ function base64Image(src) {
 	return util.format("data:%s;base64,%s", mime.lookup(src), data);
 }
 
-// Simple upload form
-const form = "<!DOCTYPE HTML><html><body>" +
-  "<form method='post' action='/upload' enctype='multipart/form-data'>" +
-  "<input type='file' name='image'/>" +
-  "<input type='submit' /></form>" +
-  "</body>  </html>";
-
 app.get("/", (req, res) => {
-	res.writeHead(200, {
-		"Content-Type": "text/html",
-	});
-	res.end(form);
+	res.sendFile(__dirname + '/index.html')
 });
 
-const imageSearch = require("./src/scripts/imagesearch");
-const googleSearch = require("./src/scripts/googleSearch");
-
-
-googleSearch.getSearchResults("North Korea", (whatyouget) => {
-	console.log(whatyouget);
+app.get("/results", (req, res) => {
+	const searchString = "Noth Korea";
+googleSearch.getSearchResults(searchString, (searchResults) => {
+   return res.json(searchResults);
 });
+});
+
 
 // const imagePath = "http://wallppr.net/wp-content/uploads/2016/10/Car-4K-Wallpaper-10.jpeg";
 
 
 // Get the uploaded image
 // Image is uploaded to req.file.path
+
+
+
 app.post("/upload", upload.single("image"), (req, res, next) => {
-	res.writeHead(200, {
-		"Content-Type": "text/html",
+	
+  console.log(JSON.stringify(req.file.path));
+  res.writeHead(200, {
+		"Content-Type": "text/html"
 	});
 	res.write("<!DOCTYPE HTML><html><body>");
-	res.write("POST request to the page");
+	res.write("POST request to the page.");
 	res.write("vision api response");
   // Base64 the image so we can display it on the page
 	res.write(`<img width=200 src="${base64Image(req.file.path)}"><br>`);
@@ -63,6 +66,7 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 		if (type === "label") {
 			entities.forEach(text => console.log(text));
 		} else if (type === "webentities") {
+
       /*     if (entities.fullMatchingImages.length > 0) {
                 console.log(`Full matches found: ${entities.fullMatchingImages.length}`);
                 entities.fullMatchingImages.forEach((image) => {
@@ -83,6 +87,7 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 
 			if (entities.webEntities.length > 0) {
 				console.log(`index Web entities found: ${entities.webEntities.length}`);
+				res.write(entities.webEntities.length);
 				entities.webEntities.forEach((webEntity) => {
 					console.log(`Description: ${webEntity.description}`);
 					console.log(`Score: ${webEntity.score}`);
@@ -95,7 +100,6 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 
 	res.end("</body></html>");
 });
-
 
 app.listen(8080, () => {
 	console.log("Server running on port 8080");
