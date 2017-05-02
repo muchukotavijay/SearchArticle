@@ -24,7 +24,12 @@ const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
-
+/*
+app.use(function (req, res, next) {
+  console.log('Time:', Date.now())
+  next()
+})
+*/
 app.set('views', './views') // specify the views directory
 app.set('view engine', 'ejs');
 
@@ -92,16 +97,16 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
           /*console.log(`Description: ${webEntity.description}`);
           console.log(`Score: ${webEntity.score}`);*/
         });
-
 			}
 		}
   }, function(){
+      //console.log('about to redirect');
+      //res.redirect('/results');
       res.end("</body></html>");
   });
 
-	next();
-
-
+    
+	//next();
 });
 
 app.get("/results", (req, res) => {
