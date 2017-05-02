@@ -20,7 +20,13 @@ const upload = multer({
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true}))
+const port = process.env.PORT || 8080; 
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
+
+app.set('views', './views') // specify the views directory
+app.set('view engine', 'ejs');
 
 // Turn image into Base64 so we can display it easily
 
@@ -100,11 +106,16 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 
 app.get("/results", (req, res) => {
   const searchString = "Noth Korea";
+
 googleSearch.getSearchResults(searchString, (searchResults) => {
-   return res.json(searchResults);
-});
+  //console.log(searchResults);
+   return res.render('results', {msg : "Search Results", output: searchResults});
 });
 
-app.listen(8080, () => {
+
+
+});
+
+app.listen(port, () => {
 	console.log("Server running on port 8080");
 });

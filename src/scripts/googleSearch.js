@@ -19,7 +19,8 @@ googleSearch.getSearchResults = (searchText, callback) => {
 			const result = {
 				title: item.title,
 				content: item.content,
-				unescapedUrl: item.unescapedUrl
+				unescapedUrl: item.unescapedUrl,
+				image: item.richSnippet && item.richSnippet.cseThumbnail
 			};
 			return result;
 		});

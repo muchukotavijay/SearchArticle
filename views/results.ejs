@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <% include ../views/partials/head %>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../views/partials/header %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+            
+                <div class="jumbotron">
+                    <h1>This is great</h1>
+                    <p>Welcome to templating using EJS</p>
+                </div>
+
+                <p><%= msg %></p>
+                <div class="search-results">
+                <ul class="list-group">
+				    <% output.forEach(function(item) { %>
+				        <li class="list-group-item clearfix">
+				        <div class="media col-sm-3">
+				        <% if (item.image && item.image.src) { %>
+				        	<figure class="pull-left">
+				        		<img src="<%= item.image.src %>" class="media-object img-rounded img-responsive" alt="">
+				        	</figure>
+				        <% } %>
+				        </div>
+				        <div class="col-sm-9">
+				        <a class='resulturl' href='<%= item.unescapedUrl %>'>
+                			<%- item.title %>
+            			</a>
+				        <p class="list-group-item-text"> <%- item.content %>
+                       </p>
+				        </div>
+				        
+				        </li>
+				    <% }); %>
+				</ul>
+				</div>
+            </div>
+            <div class="col-sm-4">
+                
+                <div class="well">
+                    <h3>Look I'm A Sidebar!</h3>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <% include ../views/partials/footer %>
+    </footer>
+    
+</body>
+</html>
