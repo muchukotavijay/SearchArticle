@@ -97,11 +97,13 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 
 			}
 		}
-	});
+  }, function(){
+      res.end("</body></html>");
+  });
 
 	next();
 
-	res.write("</body></html>");
+
 });
 
 app.listen(8080, () => {
