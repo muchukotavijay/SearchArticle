@@ -51,7 +51,6 @@ googleSearch.getSearchResults(searchString, (searchResults) => {
 
 app.post("/upload", upload.single("image"), (req, res, next) => {
 	
-  console.log(JSON.stringify(req.file.path));
   res.writeHead(200, {
 		"Content-Type": "text/html"
 	});
@@ -87,18 +86,22 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 
 			if (entities.webEntities.length > 0) {
 				console.log(`index Web entities found: ${entities.webEntities.length}`);
-				res.write(entities.webEntities.length);
-				entities.webEntities.forEach((webEntity) => {
-					console.log(`Description: ${webEntity.description}`);
-					console.log(`Score: ${webEntity.score}`);
-				});
+				// res.write(entities.webEntities.length);
+
+        entities.webEntities.forEach((webEntity) => {
+          return res.write(webEntity.description);
+         // res.write(webEntity.score);
+          /*console.log(`Description: ${webEntity.description}`);
+          console.log(`Score: ${webEntity.score}`);*/
+        });
+
 			}
 		}
 	});
 
 	next();
 
-	res.end("</body></html>");
+	res.write("</body></html>");
 });
 
 app.listen(8080, () => {
