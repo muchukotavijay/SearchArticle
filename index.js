@@ -49,7 +49,6 @@ googleSearch.getSearchResults("North Korea", (whatyouget) => {
 // Get the uploaded image
 // Image is uploaded to req.file.path
 app.post("/upload", upload.single("image"), (req, res, next) => {
-
 	res.writeHead(200, {
 		"Content-Type": "text/html",
 	});
@@ -60,10 +59,10 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 	res.write(`<img width=200 src="${base64Image(req.file.path)}"><br>`);
 
 	imageSearch.getEntities(req.file.path, (entities, type) => {
+		console.log(req.file.path);
 		if (type === "label") {
 			entities.forEach(text => console.log(text));
 		} else if (type === "webentities") {
-
       /*     if (entities.fullMatchingImages.length > 0) {
                 console.log(`Full matches found: ${entities.fullMatchingImages.length}`);
                 entities.fullMatchingImages.forEach((image) => {
@@ -83,7 +82,7 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
             */
 
 			if (entities.webEntities.length > 0) {
-				console.log(`index Web entities found: ${results.webEntities.length}`);
+				console.log(`index Web entities found: ${entities.webEntities.length}`);
 				entities.webEntities.forEach((webEntity) => {
 					console.log(`Description: ${webEntity.description}`);
 					console.log(`Score: ${webEntity.score}`);
