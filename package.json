@@ -8,7 +8,7 @@
     "lint": "eslint './src/**/*.js' 'index.js'",
     "lint-html": "eslint **/*.js -f html -o ./reports/lint-results.html",
     "lint-fix": "eslint --fix eslint './src/**/*.js' 'index.js'",
-    "dev": "node index.js",
+    "dev": "nodemon index.js",
     "start": "npm run lint && node index.js"
   },
   "repository": {

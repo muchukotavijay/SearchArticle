@@ -33,13 +33,6 @@ app.get("/", (req, res) => {
 	res.sendFile(__dirname + '/index.html')
 });
 
-app.get("/results", (req, res) => {
-	const searchString = "Noth Korea";
-googleSearch.getSearchResults(searchString, (searchResults) => {
-   return res.json(searchResults);
-});
-});
-
 
 // const imagePath = "http://wallppr.net/wp-content/uploads/2016/10/Car-4K-Wallpaper-10.jpeg";
 
@@ -55,8 +48,7 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 		"Content-Type": "text/html"
 	});
 	res.write("<!DOCTYPE HTML><html><body>");
-	res.write("POST request to the page.");
-	res.write("vision api response");
+	res.write("<h3>POST request to the page / vision api response.</h3>");
   // Base64 the image so we can display it on the page
 	res.write(`<img width=200 src="${base64Image(req.file.path)}"><br>`);
 
@@ -89,7 +81,7 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 				// res.write(entities.webEntities.length);
 
         entities.webEntities.forEach((webEntity) => {
-          return res.write(webEntity.description);
+          return res.write(webEntity.description +'</br>');
          // res.write(webEntity.score);
           /*console.log(`Description: ${webEntity.description}`);
           console.log(`Score: ${webEntity.score}`);*/
@@ -104,6 +96,13 @@ app.post("/upload", upload.single("image"), (req, res, next) => {
 	next();
 
 
+});
+
+app.get("/results", (req, res) => {
+  const searchString = "Noth Korea";
+googleSearch.getSearchResults(searchString, (searchResults) => {
+   return res.json(searchResults);
+});
 });
 
 app.listen(8080, () => {
