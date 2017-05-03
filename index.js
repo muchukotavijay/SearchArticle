@@ -41,7 +41,7 @@ function base64Image(src) {
 }
 
 app.get("/", (req, res) => {
-	res.sendFile(__dirname + '/index.html')
+	res.render(__dirname + "/views/index.ejs");
 });
 
 
@@ -53,16 +53,8 @@ app.get("/", (req, res) => {
 
 
 
-app.post("/upload", upload.single("image"), (req, res, next) => {
+app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 	
-  /*res.writeHead(200, {
-		"Content-Type": "text/html"
-	});
-	res.write("<!DOCTYPE HTML><html><body>");
-	res.write("<h3>POST request to the page / vision api response.</h3>");
-  // Base64 the image so we can display it on the page
-	res.write(`<img width=200 src="${base64Image(req.file.path)}"><br>`);
-*/
 	imageSearch.getEntities(req.file.path, (entities, type) => {
 		console.log(req.file.path);
 		if (type === "label") {
