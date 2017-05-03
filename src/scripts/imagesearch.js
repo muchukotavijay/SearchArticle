@@ -1,3 +1,5 @@
+'use strict';
+
 const vision = require("@google-cloud/vision")({
 	projectId: "searcharticle-165304",
      // The path to your key file:
