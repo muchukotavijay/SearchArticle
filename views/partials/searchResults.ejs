@@ -1,0 +1,23 @@
+<!-- views/partials/searchResults.ejs -->
+
+<ul class="list-group">
+    <% searchResults.forEach(function(item) { %>
+        <li class="list-group-item clearfix">
+        <div class="media col-sm-3">
+        <% if (item.image && item.image.src) { %>
+            <figure class="pull-left">
+                <img src="<%= item.image.src %>" class="media-object img-rounded img-responsive" alt="">
+            </figure>
+        <% } %>
+        </div>
+        <div class="col-sm-9">
+        <a class='resulturl' href='<%= item.unescapedUrl %>'>
+            <%- item.title %>
+        </a>
+        <p class="list-group-item-text"> <%- item.content %>
+       </p>
+        </div>
+        
+        </li>
+    <% }); %>
+</ul>
