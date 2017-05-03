@@ -43,6 +43,7 @@ app.set("view engine", "ejs");
 // Turn image into Base64 so we can display it easily
 
 function base64Image(src) {
+	//console.log(src);
 	const data = fs.readFileSync(src).toString("base64");
 	return util.format("data:%s;base64,%s", mime.lookup(src), data);
 }
@@ -59,8 +60,9 @@ app.get("/", (req, res) => {
 // Image is uploaded to req.file.path
 
 app.post("/upload", upload.single("pickimg"), (req, res, next) => {
+	console.log(req.file.path)
 	imageSearch.getEntities(req.file.path, (entities, type) => {
-		console.log(req.file.path);
+		//console.log(req.file.path);
 		if (type === "label") {
             //			entities.forEach(text => console.log(text));
 		} else if (type === "webentities") {
@@ -74,12 +76,10 @@ app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 					return result;
 				});
 
-				const searchString = visionResults.map(elem => elem.description).join("+");
-
 				const googleSearchString = visionResults[0].description;
 
 				googleSearch.getSearchResults(googleSearchString, (searchResults) => {
-			        res.render("upload", { msg: "upload", pic: base64Image(req.file.path), visionResults, searchString, searchResults });
+			        res.render("upload", { msg: "upload", pic: base64Image(req.file.path), visionResults, googleSearchString, searchResults });
 			    });
 			}
 		}
