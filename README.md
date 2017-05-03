@@ -31,3 +31,4 @@ To do:
 7) code compression / linting /cleanup
 8) manual search -> did you mean suggestions (call results route again?)
 9) loading / spinners (analysing image, loading search results)
+10) Image size
