@@ -24,11 +24,13 @@ To do:
 
 1) upload / results routing
 2) image upload page 1
-3) error handling (lare image, wrong result from vision api, wrong result from google search, app crash due to error etc)
+3) (vijay) error handling (lare image, wrong result from vision api, wrong result from google search, app crash due to error, search for non-findable inputs etc)
 4) OVerall UI
-5) search keyword finding logic - > text search + web entities + similar. Using scores
-6) Yoda design / quotes (ester egg)
-7) code compression / linting /cleanup
-8) manual search -> did you mean suggestions (call results route again?)
-9) loading / spinners (analysing image, loading search results)
-10) Image size
+5) search keyword finding logic - > text search + web entities + similar. Use scores if needed.
+6) partial reloading - manual search -> did you mean suggestions (call results route again?)
+7) loading / spinners (analysing image, loading search results)
+8) partial reloading - filter by masthead <-- http://www.dailytelegraph.com.au/search-results?q=bruno+mars
+9) Image size
+10) vertical photos
+11) Yoda design / quotes (ester egg)
+12) code compression / linting /cleanup

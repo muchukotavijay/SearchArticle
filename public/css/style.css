@@ -55,8 +55,16 @@ input#pickimg {
   display: none;
 }
 
+.picelement{
+	padding-left: 3em;
+	padding-right: 3em;
+}
 
 #tableBanner{
 width: 200px;
 height: auto;
+}
+
+.formattedurl{
+  font-size: 80%;
 }

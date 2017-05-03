@@ -22,15 +22,14 @@ googleSearch.getSearchResults = (searchText, callback) => {
 				title: item.title,
 				content: item.content,
 				unescapedUrl: item.unescapedUrl,
-				image: item.richSnippet && item.richSnippet.cseThumbnail
+				image: item.richSnippet && item.richSnippet.cseThumbnail,
+				formattedUrl: item.formattedUrl
 			};
 			return result;
 		});
 
 
 		callback(searchResults);
-        // console.log(searchResults);
-        // !!body &&
 	});
 };
 
