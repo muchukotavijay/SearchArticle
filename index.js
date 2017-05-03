@@ -32,6 +32,11 @@ app.use(function (req, res, next) {
   next()
 })
 */
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+
 app.set("views", "./views"); // specify the views directory
 app.set("view engine", "ejs");
 
@@ -79,8 +84,6 @@ app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 			}
 		}
 	});
-
-
     // next();
 });
 

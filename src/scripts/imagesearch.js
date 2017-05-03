@@ -12,7 +12,7 @@ const imageSearch = {};
 
 imageSearch.getEntities = (filePath, callback) => {
      // The name of the image file to annotate
-	const fileName = filePath || "./assets/somegirl.jpeg";
+	const fileName = filePath || "./assets/yoda.jpeg";
 
      // callback('these entities')
 

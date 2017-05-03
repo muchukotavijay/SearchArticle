@@ -10,23 +10,16 @@
          <div class="row">
             <div class="col-sm-8">
                <form id="imgForm" action="/upload" method="POST" enctype="multipart/form-data">
-                  
                   <button type="submit" id="submitImg">Submit</button>
-               
-               
-               <label class="fileContainer">
-    
-
-               <div class="picelement btn btn-lg btn-success">
-                  <div id="fakeInput" onclick="javascript:popRightAway()"><i onclick="cancelBubble(event)" class="fa fa-camera"></i><span onclick="cancelBubble(event)">&nbsp;Take a picture</span></div>
-                  <input type="file" id="pickimg" name="pickimg" accept="image/*"  />
-                </div>
-               
-               </label>
-               <img src="" id="tableBanner" />
-               <div id="res"></div>
-            
-</form>
+                  <label class="fileContainer">
+                     <div class="picelement btn btn-lg btn-success">
+                        <div id="fakeInput" onclick="javascript:popRightAway()"><i onclick="cancelBubble(event)" class="fa fa-camera"></i><span onclick="cancelBubble(event)">&nbsp;Take a picture</span></div>
+                        <input type="file" id="pickimg" name="pickimg" accept="image/*"  />
+                     </div>
+                  </label>
+                  <img src="" id="tableBanner" class="img-rounded img-responsive" />
+                  <div id="res"></div>
+               </form>
             </div>
             <div class="col-sm-4">
                <div class="well">

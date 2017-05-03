@@ -24,7 +24,7 @@ To do:
 
 1) upload / results routing
 2) image upload page 1
-3) (vijay) error handling (lare image, wrong result from vision api, wrong result from google search, app crash due to error, search for non-findable inputs etc)
+3) (vijay) error handling (lare image, wrong result from vision api, wrong result from google search, app crash due to error, search for non-findable inputs, taking to long to respond etc)
 4) OVerall UI
 5) search keyword finding logic - > text search + web entities + similar. Use scores if needed.
 6) partial reloading - manual search -> did you mean suggestions (call results route again?)
