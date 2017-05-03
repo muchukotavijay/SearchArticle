@@ -34,4 +34,5 @@ To do:
 10) vertical photos
 11) Yoda design / quotes (ester egg)
 12) code compression / linting /cleanup
-13) Additional account
+13) Additional Google Cloud account
+14) Reduce image file size for performance

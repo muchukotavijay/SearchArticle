@@ -48,6 +48,13 @@ function base64Image(src) {
 	return util.format("data:%s;base64,%s", mime.lookup(src), data);
 }
 
+function fileSizeInKBs(filename) {
+    const stats = fs.statSync(filename);
+    const fileSizeInBytes = stats.size;
+    const fileSizeInKBs = fileSizeInBytes / 1000.0;
+    return fileSizeInKBs
+}
+
 app.get("/", (req, res) => {
 	res.render(__dirname + "/views/index.ejs");
 });
@@ -60,7 +67,11 @@ app.get("/", (req, res) => {
 // Image is uploaded to req.file.path
 
 app.post("/upload", upload.single("pickimg"), (req, res, next) => {
-	console.log(req.file.path)
+
+	const size = fileSizeInKBs(req.file.path);
+	console.log(req.file.path + ' [ ' + size + ' KBs ]');
+
+
 	imageSearch.getEntities(req.file.path, (entities, type) => {
 		//console.log(req.file.path);
 		if (type === "label") {
