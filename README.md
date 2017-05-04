@@ -30,9 +30,9 @@ To do:
 6) partial reloading - manual search -> did you mean suggestions (call results route again?)
 7) loading / spinners (analysing image, loading search results)
 8) partial reloading - filter by masthead <-- http://www.dailytelegraph.com.au/search-results?q=bruno+mars
-9) Image size
 10) vertical photos
 11) Yoda design / quotes (ester egg)
 12) code compression / linting /cleanup
 13) Additional Google Cloud account
 14) Reduce image file size for performance
+15) Image orientation
