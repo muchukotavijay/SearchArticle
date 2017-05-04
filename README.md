@@ -22,15 +22,14 @@ https://www.googleapis.com/customsearch/v1element?key=<API_KEY>&rsz=filtered_cse
 
 To do:
 
-1) upload / results routing
-2) image upload page 1
+x 1) upload / results routing
+x 2) image upload page 1
 3) (vijay) error handling (lare image, wrong result from vision api, wrong result from google search, app crash due to error, search for non-findable inputs, taking to long to respond etc)
 4) OVerall UI
-5) search keyword finding logic - > text search + web entities + similar. Use scores if needed.
+5) (vijay / kannan) search keyword finding logic - > text search + web entities + similar. Use scores if needed.
 6) partial reloading - manual search -> did you mean suggestions (call results route again?)
 7) loading / spinners (analysing image, loading search results)
 8) partial reloading - filter by masthead <-- http://www.dailytelegraph.com.au/search-results?q=bruno+mars
-10) vertical photos
 11) Yoda design / quotes (ester egg)
 12) code compression / linting /cleanup
 13) Additional Google Cloud account
