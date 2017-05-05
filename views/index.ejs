@@ -3,31 +3,45 @@
       <% include ../views/partials/head %>
    </head>
    <body class="container">
-      <header>
+      <header class="masthead">
          <% include ../views/partials/header %>
-      </header>
-      <main>
          <div class="row">
-            <div class="col-sm-8">
-               <form id="imgForm" action="/upload" method="POST" enctype="multipart/form-data">
-                  <button type="submit" id="submitImg">Submit</button>
-                  <label class="fileContainer">
-                     <div class="picelement btn btn-lg btn-success">
-                        <div id="fakeInput" onclick="javascript:popRightAway()"><i onclick="cancelBubble(event)" class="fa fa-camera"></i><span onclick="cancelBubble(event)">&nbsp;Take a picture</span></div>
-                        <input type="file" id="pickimg" name="pickimg" accept="image/*"  />
-                     </div>
-                  </label>
-                  <img src="" id="tableBanner" class="img-rounded img-responsive" />
-                  <div id="res"></div>
-               </form>
+            <div class="col-sm-7">
+               <div class="header-content">
+                  <div class="header-content-inner">
+                     <h1 id="quoteDisplay" class="quoteDisplay"></h1>
+                     <em>- Master Yoda</em>
+                     <form id="imgForm" action="/upload" method="POST" enctype="multipart/form-data">
+                        <button type="submit" id="submitImg">Submit</button>
+                        <label class="fileContainer">
+                           <div class="picelement btn-lg btn btn-outline page-scroll">
+                              <div id="fakeInput" onclick="javascript:popRightAway()"><i onclick="cancelBubble(event)" class="fa fa-camera"></i><span onclick="cancelBubble(event)">&nbsp;Take a picture</span></div>
+                              <input type="file" id="pickimg" name="pickimg" accept="image/*"  />
+                           </div>
+                        </label>
+                        <img src="" id="tableBanner" class="img-rounded img-responsive" />
+                        <div id="res"></div>
+                     </form>
+                  </div>
+               </div>
             </div>
-            <div class="col-sm-4">
-               <div class="well">
-                  <h3>Look I'm A Sidebar!</h3>
+            <div class="col-sm-5">
+               <div class="device-container">
+                  <div class="device-mockup iphone6_plus portrait white">
+                     <div class="device">
+                        <div class="screen">
+                           <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                           <img src="img/Master_Yoda.png" class="img-responsive" alt="">
+                        </div>
+                        <div class="button">
+                           <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                        </div>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
-      </main>
+      </header>
       <footer>
          <% include ../views/partials/footer %>
       </footer>

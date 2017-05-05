@@ -60,3 +60,29 @@ function cancelBubble(e) {
  if (evt.stopPropagation)    evt.stopPropagation();
  if (evt.cancelBubble!=null) evt.cancelBubble = true;
 }
+
+
+
+
+
+
+(function() {
+  var getQuote, totalQuotes;
+
+  var quotes = [
+    ["You will know (the good from the bad) when you are calm, at peace. Passive. A Jedi uses the Force for knowledge and defense, never for attack."],
+    ["Feel the force!"],
+    ["You must unlearn what you have learned."]
+  ];
+
+  totalQuotes = quotes.length;
+
+  getQuote = function() {
+    var activeQuotes;
+    activeQuotes = quotes[Math.floor(Math.random() * totalQuotes)];
+    return $('#quoteDisplay').text(activeQuotes);
+  };
+
+  getQuote();
+
+}).call(this);
