@@ -73,9 +73,9 @@ function cancelBubble(e) {
     ["You will know (the good from the bad) when you are calm, at peace. Passive. A Jedi uses the Force for knowledge and defense, never for attack."],
     ["Feel the force!"],
     ["You must unlearn what you have learned."],
-    ["In a dark place we find ourselves, and a little more knowledge lights our way.
-"],
-["You will find only what you bring in."]
+    ["In a dark place we find ourselves, and a little more knowledge lights our way."],
+    ["You will find only what you bring in."],
+    ["Difficult to see. Always in motion is the future.."]
 
   ];
 

@@ -63,6 +63,7 @@ input#pickimg {
 #tableBanner{
 width: 200px;
 height: auto;
+margin: 20px auto 0;
 }
 
 .formattedurl{
@@ -111,4 +112,8 @@ body{
 
 .white{
   color:#fff;
+}
+
+.navbar-default{
+  background-color: #fff !important;
 }
