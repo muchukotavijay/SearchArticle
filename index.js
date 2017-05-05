@@ -5,24 +5,52 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const fs = require("fs");
+const AWS = require('aws-sdk');
 
 const util = require("util");
 
 const mime = require("mime");
 
 const multer = require("multer");
+const multerS3 = require('multer-s3');
 
 const imageSearch = require("./src/scripts/imagesearch");
 
 const googleSearch = require("./src/scripts/googleSearch");
 
+
+AWS.config.update({
+    accessKeyId: 'AKIAI53DP4RGYCEOSOTQ',
+    secretAccessKey: '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',
+    region: 'us-east-1'
+});
+var s3 = new AWS.S3();
+
+
+var resizedBucket = 'newsfoundry';
+var imageKey = 'uploaded_pic.jpg';
+
 const upload = multer({
-	dest: `${__dirname}/uploads/`
+	storage:multerS3({
+		s3:s3,
+		bucket: resizedBucket,
+		key: function (req, file, cb) {
+      cb(null, imageKey)
+    },
+		acl: 'public-read',
+		contentType: function(req, file, cb){
+			cb(null, 'image/jpeg')	
+		}
+	})
 });
 
 const app = express();
 
 const port = process.env.PORT || 8080;
+
+
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
@@ -68,11 +96,11 @@ app.get("/", (req, res) => {
 
 app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 
-	const size = fileSizeInKBs(req.file.path);
-	console.log(req.file.path + ' [ ' + size + ' KBs ]');
+	var imageUrl = 'https://s3.amazonaws.com/'+resizedBucket+'/'+imageKey;
+	
 
 
-	imageSearch.getEntities(req.file.path, (entities, type) => {
+	imageSearch.getEntities(imageUrl, (entities, type) => {
 		//console.log(req.file.path);
 		if (type === "label") {
             //			entities.forEach(text => console.log(text));
@@ -90,7 +118,7 @@ app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 				const googleSearchString = visionResults[0].description;
 
 				googleSearch.getSearchResults(googleSearchString, (searchResults) => {
-			        res.render("upload", { msg: "upload", pic: base64Image(req.file.path), visionResults, googleSearchString, searchResults });
+			        res.render("upload", { msg: "upload", pic: imageUrl, visionResults, googleSearchString, searchResults });
 			    });
 			}
 		}

@@ -8,8 +8,8 @@
     "lint": "eslint './src/**/*.js' 'index.js'",
     "lint-html": "eslint **/*.js -f html -o ./reports/lint-results.html",
     "lint-fix": "eslint --fix eslint './src/**/*.js' 'index.js'",
-    "dev": "nodemon index.js",
-    "start": "npm run lint && node index.js"
+    "dev": "index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,12 @@
     "express": "^4.15.2",
     "mime": "^1.3.4",
     "multer": "^1.3.0",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "aws-sdk": "^2.49.0",
+    "multer-s3": "^2.7.0"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.49.0",
+    "multer-s3": "^2.7.0"
   }
 }
