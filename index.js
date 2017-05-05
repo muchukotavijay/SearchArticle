@@ -21,10 +21,11 @@ const googleSearch = require("./src/scripts/googleSearch");
 
 
 AWS.config.update({
-    accessKeyId: 'AKIAI53DP4RGYCEOSOTQ',
-    secretAccessKey: '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',
+    accessKeyId: 'AKIAIVA36AKYDJKFEWNQ',
+    secretAccessKey: '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',
     region: 'us-east-1'
 });
+
 var s3 = new AWS.S3();
 
 
@@ -111,7 +112,7 @@ app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 
     imageSearch.getEntities(imageUrl, (error, entities, type) => {
 
-
+        console.log(imageUrl);
 
         //console.log(req.file.path);
         if (type === "label") {
