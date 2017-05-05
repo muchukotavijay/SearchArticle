@@ -3,20 +3,21 @@
 <ul class="list-group">
     <% searchResults.forEach(function(item) { %>
         <li class="list-group-item clearfix">
-        <div class="media col-xs-3">
+        <div class="media col-sm-3">
         <% if (item.image && item.image.src) { %>
-            <figure class="pull-left">
-                <img src="<%= item.image.src %>" class="media-object img-rounded img-responsive" alt="">
-            </figure>
+           
+                <img src="<%= item.image.src %>" class="media-object resimg img-rounded img-responsive" alt="">
+            
+            <br>
         <% } %>
         </div>
-        <div class="col-xs-9">
+        <div class="col-sm-9">
         <a class='resulturl' href='<%= item.unescapedUrl %>'>
             <%- item.title %>
         </a>
         <p class="list-group-item-text"> <%- item.content %>
        </p>
-       <a class='formattedurl' href='<%= item.unescapedUrl %>'>
+       <a class='formattedurl dont-break-out' href='<%= item.unescapedUrl %>'>
             <%- item.formattedUrl %>
         </a>
         </div>
