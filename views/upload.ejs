@@ -11,19 +11,38 @@
     <main>
         <div class="row">
             <div class="col-sm-8">
-                <p><%= msg %></p>
+                <div>
+                <!-- <p><%= msg %></p> -->
                 <img src="<%= pic %>" width=200 class="img-rounded img-responsive" alt="">
+                <br />
+                <!-- <h3>Matched Items</h3> -->
+
                 <ul class="list-group">
+                    <li class="list-group-item clearfix"> <strong>Web Entities</strong></li>
                     <% visionResults.forEach(function(item) { %>
                         <li class="list-group-item clearfix">
-                            <%- item.description %> [<%- item.score %>]
+                            <!-- <%- item.description %> [<%- item.score %>] -->
+                            <a href="/results?q=<%= item.description %>"><%- item.description %></a>
+                        </li>
+                        
+                    <% }); %>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item clearfix"> <strong>Text Entities</strong></li>
+                    <% resultsObj.textEntites.forEach(function(item) { %>
+                        <li class="list-group-item clearfix">
+                            <a href="/results?q=<%= item %>"><%- item %></a>
                         </li>
                     <% }); %>
                 </ul>
-                <h3>Searching With</h3>
-                <p><strong><%= googleSearchString %></strong></p>
+
+                 <p>Searched With : <strong><%= googleSearchString %></strong></p>
+                
+                </div>
+            <div>
             </div>
-            <div class="col-sm-4">
+            </div>
+             <div class="col-sm-4">
                 
                 <div class="well">
                     <h3>Look I'm A Sidebar!</h3>

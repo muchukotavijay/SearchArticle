@@ -1,0 +1,32 @@
+<html lang="en">
+   <head>
+      <% include ../views/partials/head %>
+   </head>
+   <body class="container">
+      <header>
+         <% include ../views/partials/header %>
+      </header>
+      <main>
+         <div class="row">
+         <div class="col-sm-8">
+         <h4> <%- value %> </h4>
+         <br>
+            <div>
+            <% if (key == 'YODA_EMPTY_SEARCH_RESULTS') { %>
+                   <img src="./public/img/empty-results.jpg" alt="">
+            <% } %>
+            </div>
+            <div>
+             <% if (key == 'YODA_EMPTY_SEARCH_RESULTS') { %>
+                   <img src="https://s-media-cache-ak0.pinimg.com/originals/38/79/63/387963645565abd43556d6465c7044d5.jpg"  width=500 class="img-rounded img-responsive" alt="">
+            <% } %>
+            </div>
+         </div>
+         </div>
+      </main>
+      <footer>
+         <% include ../views/partials/footer %>
+      </footer>
+      <script src="js/scripts.js"></script>
+   </body>
+</html>

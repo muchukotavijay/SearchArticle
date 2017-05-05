@@ -17,7 +17,7 @@ const imageSearch = require("./src/scripts/imagesearch");
 const googleSearch = require("./src/scripts/googleSearch");
 
 const upload = multer({
-	dest: `${__dirname}/uploads/`
+    dest: `${__dirname}/uploads/`
 });
 
 const app = express();
@@ -32,9 +32,9 @@ app.use(function (req, res, next) {
   next()
 })
 */
-app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
+app.use(function(err, req, res, next) {
+    console.error(err.stack)
+    res.status(500).send('Something broke!')
 })
 
 app.set("views", "./views"); // specify the views directory
@@ -43,9 +43,9 @@ app.set("view engine", "ejs");
 // Turn image into Base64 so we can display it easily
 
 function base64Image(src) {
-	//console.log(src);
-	const data = fs.readFileSync(src).toString("base64");
-	return util.format("data:%s;base64,%s", mime.lookup(src), data);
+    //console.log(src);
+    const data = fs.readFileSync(src).toString("base64");
+    return util.format("data:%s;base64,%s", mime.lookup(src), data);
 }
 
 function fileSizeInKBs(filename) {
@@ -56,7 +56,7 @@ function fileSizeInKBs(filename) {
 }
 
 app.get("/", (req, res) => {
-	res.render(__dirname + "/views/index.ejs");
+    res.render(__dirname + "/views/index.ejs");
 });
 
 
@@ -68,43 +68,80 @@ app.get("/", (req, res) => {
 
 app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 
-	const size = fileSizeInKBs(req.file.path);
-	console.log(req.file.path + ' [ ' + size + ' KBs ]');
+    let resultsObj = { webentities: [], textEntites: [] };
+
+    if (typeof req.file.path === undefined || req.file.path === '') {
+        res.render("errorPage", {});
+    }
+
+    const size = fileSizeInKBs(req.file.path);
+    console.log(req.file.path + ' [ ' + size + ' KBs ]');
 
 
-	imageSearch.getEntities(req.file.path, (entities, type) => {
-		//console.log(req.file.path);
-		if (type === "label") {
-            //			entities.forEach(text => console.log(text));
-		} else if (type === "webentities") {
-			if (entities.webEntities.length > 0) {
-				console.log(`index Web entities found: ${entities.webEntities.length}`);
-				const visionResults = entities.webEntities.map((webEntity) => {
-					const result = {
-						score: webEntity.score,
-						description: webEntity.description
-					};
-					return result;
-				});
+    imageSearch.getEntities(req.file.path, (error, entities, type) => {
 
-				const googleSearchString = visionResults[0].description;
 
-				googleSearch.getSearchResults(googleSearchString, (searchResults) => {
-			        res.render("upload", { msg: "upload", pic: base64Image(req.file.path), visionResults, googleSearchString, searchResults });
-			    });
-			}
-		}
-	});
+
+        //console.log(req.file.path);
+        if (type === "label") {
+            // should re-visit this resultsObj
+            entities[0].split('\n').forEach((entity, index) => {
+                if (index < 4) {
+                    resultsObj.textEntites.push(entity);
+                }
+            });
+        } else if (type === "webentities") {
+            if (entities.webEntities.length > 0) {
+                console.log(`index Web entities found: ${entities.webEntities.length}`);
+                const visionResults = entities.webEntities.map((webEntity) => {
+                    const result = {
+                        score: webEntity.score,
+                        description: webEntity.description
+                    };
+                    resultsObj.webentities.push(result);
+                    return result;
+                });
+
+                const googleSearchString = visionResults[0].description;
+
+                googleSearch.getSearchResults(googleSearchString, (err, searchResults) => {
+
+                    if (err) {
+                        return;
+                    }
+
+                    res.render("upload", { msg: "upload", pic: base64Image(req.file.path), visionResults, resultsObj, googleSearchString, searchResults });
+                });
+            }
+        }
+    });
     // next();
 });
 
-app.get("/results", (req, res) => {
-	const searchString = req.query.q || "Noth Korea";
-	googleSearch.getSearchResults(searchString, searchResults =>
-        // console.log(searchResults);
-         res.render("results", { msg: "Search Results", searchString, searchResults }));
+app.get('/results', (req, res) => {
+    const searchString = req.query.q || "Noth Korea";
+
+    googleSearch.getSearchResults(searchString, (err, searchResults) => {
+        console.log(err);
+        if (err) {
+            res.render("error", { key: err.key, value: err.value });
+            return;
+        }
+
+        res.render("results", { msg: "Search Results", searchString, searchResults });
+    });
+
 });
 
+
+app.get('/reloadPartical', function(req, res) {
+    const searchString = "Noth Korea";
+    googleSearch.getSearchResults(googleSearchString, (searchResults) => {
+        res.render("results", { msg: "Search Results", searchString, searchResults });
+    });
+});
+
+
 app.listen(port, () => {
-	console.log("Server running on port 8080");
+    console.log("Server running on port 8080");
 });
