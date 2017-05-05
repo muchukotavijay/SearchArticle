@@ -10,9 +10,14 @@ body{
  margin: 0 0 1em 0;
 }
 
+.list-group-item-text {
+  font-size: 13px;
+}
+
 #submitImg{
 	display: none;
 }
+
 
 /* index page picture upload */
 
