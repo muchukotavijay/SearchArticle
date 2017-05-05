@@ -21,8 +21,8 @@ const googleSearch = require("./src/scripts/googleSearch");
 
 
 AWS.config.update({
-    accessKeyId: 'AKIAIVA36AKYDJKFEWNQ',
-    secretAccessKey: '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',
+    accessKeyId: 'AKIAJHFW6XWQIAZTXPAA',
+    secretAccessKey: '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',
     region: 'us-east-1'
 });
 

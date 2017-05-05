@@ -20,6 +20,7 @@ pickimg.addEventListener('change', function() {
     fReader.readAsDataURL(file);
     console.log('try to submit form');
     imgForm.submit();
+    $('#loader').show();
 });
 
 function getBase64Image(img) {

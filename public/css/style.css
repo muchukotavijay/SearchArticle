@@ -85,9 +85,14 @@ p{
   color: #428bca !important;
 }
 
+header.masthead{
+ overflow-x:hidden; 
+}
+
 
 header.masthead .header-content{
   padding: 50px 25px 50px;
+
 }
 
 #quoteDisplay{
@@ -167,4 +172,8 @@ body{
 
 .yoda{
   font-size: 1.3em;
+}
+
+#loader{
+  display: none;
 }
