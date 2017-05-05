@@ -27,7 +27,7 @@
                         <ul class="list-group">
                     <li class="list-group-item clearfix"> <strong>Web Entities</strong></li>
                     <% visionResults.forEach(function(item) { %>
-                        <li class="list-group-item clearfix">
+                        <li class="list-group-item clearfix entities">
                             <!-- <%- item.description %> [<%- item.score %>] -->
                             <a href="/results?q=<%= item.description %>"><%- item.description %></a>
                         </li>
@@ -37,7 +37,7 @@
                 <ul class="list-group">
                     <li class="list-group-item clearfix"> <strong>Text Entities</strong></li>
                     <% resultsObj.textEntites.forEach(function(item) { %>
-                        <li class="list-group-item clearfix">
+                        <li class="list-group-item clearfix entities">
                             <a href="/results?q=<%= item %>"><%- item %></a>
                         </li>
                     <% }); %>
