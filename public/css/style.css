@@ -1,5 +1,5 @@
 html{
-	background: #fdcc52;
+	background: #3b5998;
 }
 .search-results .list-group-item {
  margin: 0 0 1em 0;
@@ -66,7 +66,8 @@ height: auto;
 }
 
 .formattedurl{
-  font-size: 80%;
+  font-size: 90%;
+  color: #428bca !important;
 }
 
 
@@ -94,4 +95,20 @@ header.masthead .header-content{
 
 body{
   background-color: transparent;
+}
+
+.nopm{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+@media (max-width: 768px) {
+    .img-upload {
+        margin: 0 auto;
+    }
+}
+
+.white{
+  color:#fff;
 }
