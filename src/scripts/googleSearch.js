@@ -27,7 +27,7 @@ googleSearch.getSearchResults = (searchText, callback) => {
 
     request({ url: serviceURL, qs: queryParams }, (err, response, body) => {
         if (err) {
-            errorObj.key = 'YODA_EMPTY_SEARCH_RESULTS_CONNECTION',
+            errorObj.key = 'YODA_EMPTY_SEARCH_RESULTS',
                 errorObj.value = 'I failed to connect to Google',
 
                 console.log(err);
