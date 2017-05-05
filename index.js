@@ -6,23 +6,52 @@ const bodyParser = require("body-parser");
 
 const fs = require("fs");
 
+const AWS = require('aws-sdk');
+
 const util = require("util");
 
 const mime = require("mime");
 
 const multer = require("multer");
+const multerS3 = require('multer-s3');
 
 const imageSearch = require("./src/scripts/imagesearch");
 
 const googleSearch = require("./src/scripts/googleSearch");
 
+
+AWS.config.update({
+    accessKeyId: 'AKIAI53DP4RGYCEOSOTQ',
+    secretAccessKey: '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',
+    region: 'us-east-1'
+});
+var s3 = new AWS.S3();
+
+
+var resizedBucket = 'newsfoundry';
+var imageKey = 'uploaded_pic.jpg';
+
 const upload = multer({
-    dest: `${__dirname}/uploads/`
+	storage:multerS3({
+		s3:s3,
+		bucket: resizedBucket,
+		key: function (req, file, cb) {
+      cb(null, imageKey)
+    },
+		acl: 'public-read',
+		contentType: function(req, file, cb){
+			cb(null, 'image/jpeg')	
+		}
+	})
 });
 
 const app = express();
 
 const port = process.env.PORT || 8080;
+
+
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(`${__dirname}/public`));
@@ -68,17 +97,19 @@ app.get("/", (req, res) => {
 
 app.post("/upload", upload.single("pickimg"), (req, res, next) => {
 
+    var imageUrl = 'https://s3.amazonaws.com/'+resizedBucket+'/'+imageKey;
+
     let resultsObj = { webentities: [], textEntites: [] };
 
     if (typeof req.file.path === undefined || req.file.path === '') {
         res.render("errorPage", {});
     }
 
-    const size = fileSizeInKBs(req.file.path);
-    console.log(req.file.path + ' [ ' + size + ' KBs ]');
+    // const size = fileSizeInKBs(req.file.path);
+    // console.log(req.file.path + ' [ ' + size + ' KBs ]');
 
 
-    imageSearch.getEntities(req.file.path, (error, entities, type) => {
+    imageSearch.getEntities(imageUrl, (error, entities, type) => {
 
 
 
@@ -110,7 +141,7 @@ app.post("/upload", upload.single("pickimg"), (req, res, next) => {
                         return;
                     }
 
-                    res.render("upload", { msg: "upload", pic: base64Image(req.file.path), visionResults, resultsObj, googleSearchString, searchResults });
+                    res.render("upload", { msg: "upload", pic: imageUrl, visionResults, resultsObj, googleSearchString, searchResults });
                 });
             }
         }
@@ -132,15 +163,6 @@ app.get('/results', (req, res) => {
     });
 
 });
-
-
-app.get('/reloadPartical', function(req, res) {
-    const searchString = "Noth Korea";
-    googleSearch.getSearchResults(googleSearchString, (searchResults) => {
-        res.render("results", { msg: "Search Results", searchString, searchResults });
-    });
-});
-
 
 app.listen(port, () => {
     console.log("Server running on port 8080");

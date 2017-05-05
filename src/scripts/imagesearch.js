@@ -15,7 +15,7 @@ const errorObj = {
 
 imageSearch.getEntities = (filePath, callback) => {
     // The name of the image file to annotate
-    const fileName = filePath || "./assets/yoda.jpeg";
+    const fileName = filePath;
 
     // callback('these entities')
 
