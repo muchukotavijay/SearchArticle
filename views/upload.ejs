@@ -2,22 +2,29 @@
 <head>
     <% include ../views/partials/head %>
 </head>
-<body class="container">
+<body class="container-fluid">
 
     <header>
         <% include ../views/partials/header %>
     </header>
 
     <main>
+
+
+
         <div class="row">
-            <div class="col-sm-8">
-                <div>
-                <!-- <p><%= msg %></p> -->
-                <img src="<%= pic %>" width=200 class="img-rounded img-responsive" alt="">
+                    <div class="col-sm-4">
+
+                         <!-- <p><%= msg %></p> -->
+                
+                <img src="<%= pic %>" width=250 class="img-upload img-rounded img-responsive" alt=""> 
                 <br />
                 <!-- <h3>Matched Items</h3> -->
 
-                <ul class="list-group">
+       
+
+                 
+                        <ul class="list-group">
                     <li class="list-group-item clearfix"> <strong>Web Entities</strong></li>
                     <% visionResults.forEach(function(item) { %>
                         <li class="list-group-item clearfix">
@@ -36,22 +43,13 @@
                     <% }); %>
                 </ul>
 
-                 <p>Searched With : <strong><%= googleSearchString %></strong></p>
-                
-                </div>
-            <div>
             </div>
-            </div>
-             <div class="col-sm-4">
-                
-                <div class="well">
-                    <h3>Look I'm A Sidebar!</h3>
-                </div>
+           
 
-            </div>
-        </div>
-        <div class="row">
             <div class="col-sm-8">
+                <p class="white">Searching for "<strong><em><%= googleSearchString %><em></strong>"</p>
+                
+                
                 <div class="search-results">
                     <%- include('../views/partials/searchResults', {searchResults: searchResults}); %>
                 </div>
