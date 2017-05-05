@@ -1,13 +1,10 @@
 html{
-	background: #2a0d4f;
+	background: rgba(201, 202, 199, 0.2);
 }
 
 body{
-      position: relative;
+    position: relative;
     width: 100%;
-
-
-
 }
 .search-results .list-group-item {
  margin: 0 0 1em 0;
