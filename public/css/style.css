@@ -1,5 +1,5 @@
 html{
-	background: #ccc;
+	background: #fdcc52;
 }
 .search-results .list-group-item {
  margin: 0 0 1em 0;
@@ -67,4 +67,31 @@ height: auto;
 
 .formattedurl{
   font-size: 80%;
+}
+
+
+header.masthead .header-content{
+  padding: 50px 25px 50px;
+}
+
+#quoteDisplay{
+  min-height: 30px
+  margin-bottom: 20px;
+}
+
+#imgForm{
+  margin: 20px 0;
+}
+
+.picelement{
+  background-color: #ffb934;
+  border-color: #fdcc52;
+}
+
+.picelement:hover{
+  background-color: #fdcc52;
+}
+
+body{
+  background-color: transparent;
 }
