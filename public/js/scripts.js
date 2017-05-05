@@ -76,7 +76,6 @@ function cancelBubble(e) {
     ["In a dark place we find ourselves, and a little more knowledge lights our way."],
     ["You will find only what you bring in."],
     ["Difficult to see. Always in motion is the future.."]
-
   ];
 
   totalQuotes = quotes.length;
